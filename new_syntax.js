@@ -18,7 +18,7 @@ class MyArray {
     return this.length;
   }
 
-  pop = function pop() {
+  pop() {
     if (this.length <= 0) {
       return;
     }
@@ -27,13 +27,27 @@ class MyArray {
     return lastItem;
   };
 
-  unshift() {
-    for (let i = 0; i < arguments.length; i++) {
-      this[this.i - this.length] = arguments[i];
-
-      ++this.length;
+  unshift(element) {
+    for (let i = this.length; i > 0; i--) {
+      this[i] = this[i - 1];
     }
+    this[0] = element;
+    ++this.length;
     return this.length;
+  };
+
+  shift() {
+    if (this.length <= 0) {
+      return;
+    } else if (this.length > 0) {
+      const element = this[0];
+      delete this[0];
+      for (let i = 0; i < this.length; i++) {
+        this[i] = this[i + 1];
+      }
+      delete this[--this.length];
+      return element;
+    };
   }
 
   forEach(cb) {
@@ -102,7 +116,7 @@ class MyArray {
   flat(depth = 1) {
     let result = new MyArray();
     for (let i = 0; i < this.length; i++) {
-      if (MyArray.isMyArray(this[i] && depth > 0){
+      if (MyArray.isMyArray(this[i] && depth > 0)) {
         result = result.concat(this[i].flat(depth - 1));
       } else if (this[i] !== undefined) {
         result.push(this[i]);
@@ -110,5 +124,7 @@ class MyArray {
     }
     return result;
   };
-
 }
+
+const userArr = new MyArray(1, 2, 3, 4, 3, 2, 4, 23);
+console.log(userArr);

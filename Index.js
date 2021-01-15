@@ -102,5 +102,3 @@ MyArray.isMyArray = function (obj) {
 };
 
 MyArray.prototype = new MyArrayProto();
-const userArr = new MyArray(1, 2, 3, 4, 3, 2, 4, 23);
-console.log(userArr);
